@@ -1,11 +1,45 @@
 import React from 'react'
 import { Table } from 'react-bootstrap'
+import * as _ from 'lodash'
 
-const Result = ({ posts }) => {
+const avatar = {
+    width: '100px',
+    height: '100px'
+}
+
+const pagination = {
+    paddingLeft: '300px'
+}
+
+const Result = ({ posts, loading, postsPerPage, totalPosts, paginate }) => {
+    if (loading) {
+        return <h2>Loading...</h2>
+    }
+
+    const pageNumbers = []
+
+    for (let i = 1; i <= Math.ceil(totalPosts / postsPerPage); i++) {
+        pageNumbers.push(i)
+    }
+    console.log(pageNumbers)
+
+
     return (
         <div className='container'>
-            <h2 className='text-center my-3'>Your result will display here...</h2>
-            <Table striped bordered hover variant="dark">
+
+
+            <ul className='pagination' style={pagination}>
+                {pageNumbers.map(number => {
+                    return (
+                        <li key={number} className='page-item'>
+                            <a onClick={() => paginate(number)} className='page-link'>
+                                {number}
+                            </a>
+                        </li>)
+                })}
+            </ul>
+
+            <Table striped bordered hover variant="dark" className='m-5'>
                 <thead >
                     <tr className='text-center'>
                         <th>Avatar</th>
@@ -13,18 +47,23 @@ const Result = ({ posts }) => {
                         <th>Type</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody style={{ cursor: 'pointer' }}>
                     {
                         posts.map(post => {
                             return (<tr key={post.id} className='text-center'>
-                                <td><img src={post.avatar_url} alt='avtarimg'/></td>
+                                <td><img src={post.avatar_url} alt='avtarimg' style={avatar} /></td>
                                 <td className='text-capitalize'>{post.login}</td>
                                 <td>{post.type}</td>
-                            </tr>)
+                            </tr>
+                            )
+                            _.sortBy(posts.login)
                         })
                     }
                 </tbody>
             </Table>
+
+
+
         </div>
     )
 }
