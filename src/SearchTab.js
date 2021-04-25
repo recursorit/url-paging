@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { Button } from 'react-bootstrap'
 import Result from './Result'
-import { set } from 'lodash'
+import lodash from 'lodash'
 
 
 const SearchTab = () => {
@@ -14,21 +14,19 @@ const SearchTab = () => {
     const [loading, setLoading] = useState(false)
     const [currentPage, setCurrentPage] = useState(1);
     const [postsPerPage] = useState(10);
-    const [sort, setSort] = useState('asc')
+
     const handleSearch = (e) => {
 
         setsearchByButton(search)
     }
 
-
-
     useEffect(() => {
         setLoading(true)
-
-        axios.get(`https://api.github.com/search/users?q=${searchByButton}in:login&per_page=100`)
+        axios.get(`https://api.github.com/search/users?q=${searchByButton}in:login&per_page=100&sort=followers`)
             .then(res => {
                 console.log(res)
-                setPosts(res.data.items)
+                let response = lodash.sortBy(res.data.items,["login"])
+                setPosts(response);
                 setLoading(false)
             })
             .catch(err => {
