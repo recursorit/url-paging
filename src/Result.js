@@ -1,6 +1,5 @@
 import React from 'react'
-import { Table } from 'react-bootstrap'
-import * as _ from 'lodash'
+import { Table,Button } from 'react-bootstrap'
 
 const avatar = {
     width: '100px',
@@ -11,7 +10,7 @@ const pagination = {
     paddingLeft: '300px'
 }
 
-const Result = ({ posts, loading, postsPerPage, totalPosts, paginate }) => {
+const Result = ({ posts, loading, postsPerPage, totalPosts, paginate,avatartsort,loginsort,typesort }) => {
     if (loading) {
         return <h2>Loading...</h2>
     }
@@ -42,9 +41,10 @@ const Result = ({ posts, loading, postsPerPage, totalPosts, paginate }) => {
             <Table striped bordered hover variant="dark" className='m-5'>
                 <thead >
                     <tr className='text-center'>
-                        <th>Avatar</th>
-                        <th>Login</th>
-                        <th>Type</th>
+                        <th><Button onClick={avatartsort}>Avatar</Button></th>
+                        <th><Button onClick={loginsort}>Login</Button></th>
+                        <th><Button onClick={typesort}>Type</Button></th>
+                      
                     </tr>
                 </thead>
                 <tbody style={{ cursor: 'pointer' }}>
@@ -56,12 +56,15 @@ const Result = ({ posts, loading, postsPerPage, totalPosts, paginate }) => {
                                 <td>{post.type}</td>
                             </tr>
                             )
-                            _.sortBy(posts.login)
+
                         })
                     }
                 </tbody>
             </Table>
-
+           
+            <a href='http://localhost:3000/'>
+            <input type="button" value="Back"/>
+            </a>
 
 
         </div>
