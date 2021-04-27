@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState} from 'react'
 import axios from 'axios'
 import { Button, Form } from 'react-bootstrap'
 import Result from './Result'
@@ -115,11 +115,11 @@ const SearchTab = () => {
             <div>
                 <h2 className='text-center text-primary my-3 h2result'>Your result will display here...</h2>
                 {showTable ? <Result posts={currentPosts} loading={loading} postsPerPage={postsPerPage} totalPosts={posts.length} paginate={paginate} avatarsort={avatarsort}
-                    loginsort={loginsort} typesort={typesort} avatarAsc={avatarAsc}
+                    loginsort={loginsort}
+                     typesort={typesort} 
                     loginAsc={loginAsc}
-                    typeAsc={typeAsc} avatarAsc={avatarAsc}
-                    loginAsc={loginAsc}
-                    typeAsc={typeAsc}
+                    typeAsc={typeAsc} 
+                    avatarAsc={avatarAsc}
                     typeSortD={typeSortD}
                     loginSortD={loginSortD}
                     avatarSortD={avatarSortD} /> : <div></div>}
