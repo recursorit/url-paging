@@ -1,0 +1,66 @@
+.input{
+    padding-left: 350px;
+}
+.table{
+    padding-left: 255px;
+}
+.avatar{
+    width: 50px;
+    height: 50px;
+    border-radius: 30px;
+}
+.formgroup{
+    width: 60px;
+}
+.form-label{
+    width: 130px;
+}
+.custom-select{
+position: relative;
+bottom: 35px;
+left: 120px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* For iphone */
+@media (min-width:320px) and (max-width:815px){
+.input{
+    padding-left:0;
+}
+.table{
+    /* position: relative; */
+    width: 314px;
+font-size: 12px;
+}
+.assign{
+    font-size: 25px!important;
+}
+
+}
+
+/* For ipad */
+@media (min-width:760px)and (max-width:1020px){
+    .input{
+        padding-left:140px;
+    }
+    .table{
+        padding-left:40px ;
+    }
+}
+
+/* @media (min-width:1024px) and(max-width:1370px){
+    padding-left: 0;
+} */

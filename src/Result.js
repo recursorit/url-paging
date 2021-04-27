@@ -36,13 +36,13 @@ const Result = ({ posts, loading, postsPerPage, totalPosts, paginate, avatarsort
 
             <Table striped bordered hover variant="" className='m-5 tablee  '>
                 <thead >
-                    <tr className='text-center'>
-                        <th > {avatarAsc ? <Button onClick={avatartSortD} className='bfs'>Avatar ↑ </Button> : <Button className='bfs' variant="dark" onClick={avatarsort} >Avatar </Button>}</th>
-                        <th>{loginAsc ? <Button onClick={loginSortD} className='bfs'>Login ↑ </Button> : <Button variant="dark" className='bfs' onClick={loginsort} >Login  </Button>}</th>
-                        <th>{typeAsc ? <Button onClick={typeSortD} className='bfs'>Type ↑  </Button> : <Button variant="dark" className='bfs' onClick={typesort} >Type</Button>
-                        }</th>
+                        <tr className='text-center'>
+                            <th > {avatarAsc ? <Button onClick={avatartSortD} className='bfs'>Avatar ↑ </Button> : <Button className='bfs' variant="dark" onClick={avatarsort} >Avatar </Button>}</th>
+                            <th>{loginAsc ? <Button onClick={loginSortD} className='bfs'>Login ↑ </Button> : <Button variant="dark" className='bfs' onClick={loginsort} >Login  </Button>}</th>
+                            <th>{typeAsc ? <Button onClick={typeSortD} className='bfs'>Type ↑  </Button> : <Button variant="dark" className='bfs' onClick={typesort} >Type</Button>
+                            }</th>
 
-                    </tr>
+                        </tr>
                 </thead>
                 <tbody style={{ cursor: 'pointer' }}>
                     {
