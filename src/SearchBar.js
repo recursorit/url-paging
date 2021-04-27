@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container, Row, Col, InputGroup, FormControl, Button,search } from 'react-bootstrap'
+import { Container, Row, Col, InputGroup, FormControl, Button} from 'react-bootstrap'
 
 
 function SearchBar({ handleSearch, search, setSearch }) {
