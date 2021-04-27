@@ -1,16 +1,14 @@
 import React from 'react'
-import { Table,Button } from 'react-bootstrap'
+import { Table, Button } from 'react-bootstrap'
 
 const avatar = {
     width: '100px',
     height: '100px'
 }
 
-const pagination = {
-    paddingLeft: '300px'
-}
 
-const Result = ({ posts, loading, postsPerPage, totalPosts, paginate,avatartsort,loginsort,typesort }) => {
+
+const Result = ({ posts, loading, postsPerPage, totalPosts, paginate, avatarsort, loginsort, typesort, avatartSortD, loginSortD, typeSortD, avatarAsc, loginAsc, typeAsc }) => {
     if (loading) {
         return <h2>Loading...</h2>
     }
@@ -24,10 +22,8 @@ const Result = ({ posts, loading, postsPerPage, totalPosts, paginate,avatartsort
 
 
     return (
-        <div className='container'>
-
-
-            <ul className='pagination' style={pagination}>
+        <div className='container resultcontainer'>
+            <ul className='pagination'>
                 {pageNumbers.map(number => {
                     return (
                         <li key={number} className='page-item'>
@@ -38,20 +34,21 @@ const Result = ({ posts, loading, postsPerPage, totalPosts, paginate,avatartsort
                 })}
             </ul>
 
-            <Table striped bordered hover variant="dark" className='m-5'>
+            <Table striped bordered hover variant="" className='m-5 tablee  '>
                 <thead >
                     <tr className='text-center'>
-                        <th><Button onClick={avatartsort}>Avatar</Button></th>
-                        <th><Button onClick={loginsort}>Login</Button></th>
-                        <th><Button onClick={typesort}>Type</Button></th>
-                      
+                        <th > {avatarAsc ? <Button onClick={avatartSortD} className='bfs'>Avatar ↑ </Button> : <Button className='bfs' variant="dark" onClick={avatarsort} >Avatar </Button>}</th>
+                        <th>{loginAsc ? <Button onClick={loginSortD} className='bfs'>Login ↑ </Button> : <Button variant="dark" className='bfs' onClick={loginsort} >Login  </Button>}</th>
+                        <th>{typeAsc ? <Button onClick={typeSortD} className='bfs'>Type ↑  </Button> : <Button variant="dark" className='bfs' onClick={typesort} >Type</Button>
+                        }</th>
+
                     </tr>
                 </thead>
                 <tbody style={{ cursor: 'pointer' }}>
                     {
                         posts.map(post => {
                             return (<tr key={post.id} className='text-center'>
-                                <td><img src={post.avatar_url} alt='avtarimg' style={avatar} /></td>
+                                <td><img src={post.avatar_url} alt='avtarimg' className='avatar' style={avatar} /></td>
                                 <td className='text-capitalize'>{post.login}</td>
                                 <td>{post.type}</td>
                             </tr>
@@ -61,9 +58,9 @@ const Result = ({ posts, loading, postsPerPage, totalPosts, paginate,avatartsort
                     }
                 </tbody>
             </Table>
-           
+
             <a href='http://localhost:3000/'>
-            <input type="button" value="Back"/>
+                <Button type="button" className='btn btn-md back' value="Back"> Go Back</Button>
             </a>
 
 
