@@ -59,7 +59,7 @@ const Result = ({ posts, loading, postsPerPage, totalPosts, paginate, avatarsort
                 </tbody>
             </Table>
 
-            <a href='http://localhost:3000/'>
+            <a href='https://github-api-paging.netlify.app/'>
                 <Button type="button" className='btn btn-md back' value="Back"> Go Back</Button>
             </a>
 
