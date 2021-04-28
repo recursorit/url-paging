@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container, Row, Col, InputGroup, FormControl, Button} from 'react-bootstrap'
+import { Container, Row, Col, InputGroup, FormControl, Button } from 'react-bootstrap'
 
 
 function SearchBar({ handleSearch, search, setSearch }) {
@@ -13,10 +13,9 @@ function SearchBar({ handleSearch, search, setSearch }) {
                                 className='text-center '
                                 placeholder="Search"
                                 value={search}
-                                onChange={(e) => setSearch(e.target.value)}
-                            />
+                                onChange={(e) => setSearch(e.target.value)} />
                             <InputGroup.Append>
-                                <Button 
+                                <Button
                                     onClick={handleSearch}
                                     disabled={!search}
                                 >Button</Button>

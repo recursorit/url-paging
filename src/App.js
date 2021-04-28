@@ -13,10 +13,13 @@ function App() {
   const [showSearch, setShowSearch] = useState(true)
   const [showTable, setShowTable] = useState(false)
   const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage, setPostsPerPage] = useState(10);
+  const [postsPerPage, setPostsPerPage] = useState(5);
   const [avatarAsc, setAvatarAsc] = useState(false)
   const [loginAsc, setLoginAsc] = useState(true)
   const [typeAsc, setTypeAsc] = useState(false)
+  const [PageNumberLimit, setPageNumberLimit] = useState(5)
+  const [maxpageNumberLimit, setMaxPageNumberLimit] = useState(5)
+  const [minpageNumberLimit, setMinPageNumberLimit] = useState(0)
 
 
   const handleSearch = () => {
@@ -55,13 +58,14 @@ function App() {
     setAvatarAsc(false)
     setLoginAsc(true)
     setTypeAsc(false)
+    setPostsPerPage(5)
   }
 
   const avatarsort = () => {
     const asort = lodash.orderBy(posts, ['avatar_url'], ['asc', 'desc'])
     setPosts(asort)
     setAvatarAsc(true)
-    setLoginAsc(true)
+    setLoginAsc(false)
     setTypeAsc(false)
   }
 
@@ -126,7 +130,15 @@ function App() {
           avatarAsc={avatarAsc}
           typeSortD={typeSortD}
           loginSortD={loginSortD}
-          avatarSortD={avatarSortD} /> : <div></div>}
+          avatarSortD={avatarSortD}
+          PageNumberLimit={PageNumberLimit}
+          maxpageNumberLimit={maxpageNumberLimit}
+          minpageNumberLimit={minpageNumberLimit}
+          setPageNumberLimit={setPageNumberLimit}
+          setMaxPageNumberLimit={setMaxPageNumberLimit}
+          setMinPageNumberLimit={setMinPageNumberLimit}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage} /> : <div></div>}
       </Container>
     </div>
   );
