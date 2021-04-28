@@ -64,7 +64,7 @@ function MainTable({ posts, postsPerPage, totalPosts, paginate, setPostsPerPage,
                         </ Table>
                         <Form className='formgroup'>
                             <Form.Group controlId='exampleForm.SelectCustom' onChange={(e) => setPostsPerPage(e.target.value)}>
-                                <Form.Label >Rows per page&nbsp;</Form.Label>
+                                <Form.Label >Rows per page</Form.Label>
                                 <Form.Control as='select' custom>
                                     <option>5</option>
                                     <option>9</option>

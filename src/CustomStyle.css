@@ -1,3 +1,4 @@
+
 .input{
     padding-left: 350px;
 }
@@ -38,6 +39,7 @@ left: 120px;
 
 /* For iphone */
 @media (min-width:320px) and (max-width:815px){
+    
 .input{
     padding-left:0;
 }
@@ -62,6 +64,3 @@ font-size: 12px;
     }
 }
 
-/* @media (min-width:1024px) and(max-width:1370px){
-    padding-left: 0;
-} */
