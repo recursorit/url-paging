@@ -30,7 +30,7 @@ function PaginationPart({ posts, postsPerPage, paginate, currentPage, setCurrent
                 <Pagination.Prev onClick={prev} disabled={currentPage === 1 ? true : false} />
                 <Pagination.Ellipsis />
                 {pageNumbers.map(number => {
-                    if (number < currentPage + 3 && number > currentPage - 3) {
+                    if (number < currentPage + 2 && number > currentPage - 2) {
                         return (
                             <Pagination.Item key={number} className='page-item' onClick={() => paginate(number)} active={number === currentPage ? true : false}>
                                 {number}
