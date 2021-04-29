@@ -5,17 +5,15 @@ import MainTable from './MainTable'
 import './CustomStyle.css';
 import axios from 'axios'
 import { Container } from 'react-bootstrap';
-import PaginationPart from './PaginationPart';
 
+let data;
 function App() {
-  const [posts, setPosts] = useState([])
+
   const [search, setSearch] = useState('')
   const [showSearch, setShowSearch] = useState(true)
-  const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage, setPostsPerPage] = useState(5);
   const [loading, setLoading] = useState(false)
-
   const BASE_URL = 'https://api.github.com';
+
 
   const generateURL = () => {
     return `?q=${encodeURIComponent(`${search} in:login`)}&per_page=100`
@@ -25,7 +23,7 @@ function App() {
     axios.get(`${BASE_URL}/search/users${generateURL(searchTerm)}`)
       .then(res => {
         console.log(res)
-        setPosts(res.data.items)
+        data = res.data.items
         setLoading(false)
         setShowSearch(false)
       })
@@ -36,24 +34,11 @@ function App() {
 
   }
 
-
-  const indexOfLastPost = currentPage * postsPerPage
-  const indexOfFirstPost = indexOfLastPost - postsPerPage
-  const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost)
-
-
-  const paginate = (pageNumbers) => {
-    setCurrentPage(pageNumbers)
-
-  }
-
-  const goBack = () => {
+  const reset = () => {
     setShowSearch(true);
-    setSearch('') 
-    setPosts([])
-    setCurrentPage(1)
-    setPostsPerPage(5)
+    setSearch('')
   }
+
 
 
   return (
@@ -65,21 +50,9 @@ function App() {
           setSearch={setSearch}
           search={search}
           loading={loading}
-        /> : <div>
-          <MainTable
-            posts={currentPosts}
-            postsPerPage={postsPerPage}
-            totalPosts={posts.length}
-            setPostsPerPage={setPostsPerPage}
-            paginate={paginate}
-            goBack={goBack}
-            setPosts={setPosts}
-            currentPage={currentPage}
-            setCurrentPage={setCurrentPage}
-          />
-          <PaginationPart posts={posts} postsPerPage={postsPerPage} paginate={paginate} currentPage={currentPage} setCurrentPage={setCurrentPage} /></div>}
-
-
+        /> : <MainTable
+          posts={data}
+          reset={reset} />}
       </Container>
     </div>
   );

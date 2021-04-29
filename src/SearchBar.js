@@ -3,11 +3,6 @@ import { Row, Col, InputGroup, FormControl, Button ,Spinner} from 'react-bootstr
 
 function SearchBar({ handleSearch, search, setSearch,loading}) {
 
-    if (loading) {
-        return <Spinner animation="border" role="status">
-            <span className="sr-only">Loading...</span>
-      </Spinner>
-    }
     return (
         <Row className='m-3 d-flex justify-content-center'>
             <Col xs={12} md={8} lg={5}>
@@ -18,15 +13,15 @@ function SearchBar({ handleSearch, search, setSearch,loading}) {
                         value={search}
                         onChange={(e) => setSearch(e.target.value)} />
                     <InputGroup.Append>
-                        <Button    onClick={handleSearch}
+                        <Button  onClick={handleSearch}
                             disabled={!search}>
-                            {/* <Spinner
+                           {loading?<Spinner
                             as='span'
                             animation='border'
                             size='sm'
                             role='status'
                             aria-hidden='true'
-                          /> */}
+                          />:null}
                         Submit</Button>
                     </InputGroup.Append>
                 </InputGroup>

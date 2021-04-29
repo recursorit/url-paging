@@ -18,17 +18,9 @@ position: relative;
 bottom: 35px;
 left: 120px;
 }
-/* .active{
-    background-color: rgb(160, 160, 160);
-    color: white;
-} */
-.table{
-    /* margin-top: 100vh; */
-}
 .tabledata{
     cursor: pointer;
 }
-
 
 
 
