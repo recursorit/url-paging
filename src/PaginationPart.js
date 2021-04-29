@@ -25,7 +25,7 @@ function PaginationPart({ posts, postsPerPage, paginate, currentPage, setCurrent
     }
     return (
         <div>
-            <Pagination className='newpagination'>
+            <Pagination>
                 <Pagination.First onClick={first} />
                 <Pagination.Prev onClick={prev} disabled={currentPage === 1 ? true : false} />
                 <Pagination.Ellipsis />

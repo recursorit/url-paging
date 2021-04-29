@@ -4,10 +4,10 @@ import { Row, Col, InputGroup, FormControl, Button ,Spinner} from 'react-bootstr
 function SearchBar({ handleSearch, search, setSearch,loading}) {
 
     return (
-        <Row className='m-3 d-flex justify-content-center'>
+        <Row className='m-3 flex justify-content-center'>
             <Col xs={12} md={8} lg={5}>
-                <InputGroup className="mt-3">
-                    <FormControl pattern="\d*" maxlength="8"
+                <InputGroup className="">
+                    <FormControl pattern="\d*" maxLength="15"
                         className='text-center '
                         placeholder="Search"
                         value={search}

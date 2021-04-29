@@ -12,20 +12,26 @@ function App() {
   const [search, setSearch] = useState('')
   const [showSearch, setShowSearch] = useState(true)
   const [loading, setLoading] = useState(false)
+  const [error,setError] = useState(false)
   const BASE_URL = 'https://api.github.com';
 
 
-  const generateURL = () => {
-    return `?q=${encodeURIComponent(`${search} in:login`)}&per_page=100`
+  const generateURL = (searchTerm) => {
+    return `?q=${encodeURIComponent(`${searchTerm} in:login`)}&per_page=100`
   }
-  const handleSearch = (searchTerm) => {
+  const handleSearch = () => {
     setLoading(true)
-    axios.get(`${BASE_URL}/search/users${generateURL(searchTerm)}`)
+    axios.get(`${BASE_URL}/search/users${generateURL(search)}`)
       .then(res => {
         console.log(res)
         data = res.data.items
         setLoading(false)
         setShowSearch(false)
+        if(res.data.items<1){
+          return setError(true)
+        }else{
+          return null
+        }
       })
       .catch(err => {
         console.log(err)
@@ -43,7 +49,7 @@ function App() {
 
   return (
     <div >
-      <h1 className='text-center assign'>React JS Assignment</h1>
+      <h1 className='text-center m-2'>React JS Assignment</h1>
       <Container>
         {showSearch ? <SearchBar
           handleSearch={handleSearch}
@@ -52,7 +58,8 @@ function App() {
           loading={loading}
         /> : <MainTable
           posts={data}
-          reset={reset} />}
+          reset={reset} 
+          error={error}/>}
       </Container>
     </div>
   );
