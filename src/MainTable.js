@@ -61,9 +61,9 @@ const MainTable = ({ posts, reset, error }) => {
                 < Table className='p-2' striped bordered >
                     <thead>
                         <tr className='text-center hovereffect'>
-                            <th> <a onClick={() => sorting('avatar_url')}>Avatar  {'avatar_url' ? arrow : null} </a></th>
-                            <th> <a onClick={() => sorting('login')} >Login  {'login '? arrow : null}</a></th>
-                            <th> <a onClick={() => sorting('type')} >Type{'type'? arrow : null}</a></th>
+                            <th> <a href='!#' onClick={() => sorting('avatar_url')}>Avatar  {'avatar_url' ? arrow : null} </a></th>
+                            <th> <a href='!#' onClick={() => sorting('login')} >Login  {'login '? arrow : null}</a></th>
+                            <th> <a href='!#' onClick={() => sorting('type')} >Type{'type'? arrow : null}</a></th>
                         </tr>
                     </thead>
                     <tbody>
