@@ -5,40 +5,38 @@ import MainTable from './MainTable'
 import './CustomStyle.css';
 import axios from 'axios'
 import { Container } from 'react-bootstrap';
-import lodash from 'lodash'
+import PaginationPart from './PaginationPart';
 
 function App() {
   const [posts, setPosts] = useState([])
   const [search, setSearch] = useState('')
   const [showSearch, setShowSearch] = useState(true)
-  const [showTable, setShowTable] = useState(false)
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage, setPostsPerPage] = useState(5);
-  const [avatarAsc, setAvatarAsc] = useState(false)
-  const [loginAsc, setLoginAsc] = useState(true)
-  const [typeAsc, setTypeAsc] = useState(false)
-  const [PageNumberLimit, setPageNumberLimit] = useState(5)
-  const [maxpageNumberLimit, setMaxPageNumberLimit] = useState(5)
-  const [minpageNumberLimit, setMinPageNumberLimit] = useState(0)
+  const [loading, setLoading] = useState(false)
 
+  const BASE_URL = 'https://api.github.com';
 
-  const handleSearch = () => {
-    axios.get(`https://api.github.com/search/users?q=${search}in:login&per_page=100&sort=followers`)
+  const generateURL = () => {
+    return `?q=${encodeURIComponent(`${search} in:login`)}&per_page=100`
+  }
+  const handleSearch = (searchTerm) => {
+    setLoading(true)
+    axios.get(`${BASE_URL}/search/users${generateURL(searchTerm)}`)
       .then(res => {
         console.log(res)
-        let response = lodash.orderBy(res.data.items, ["login"])
-        setPosts(response);
-        setShowTable(true)
+        setPosts(res.data.items)
+        setLoading(false)
         setShowSearch(false)
-        setShowTable(true)
       })
       .catch(err => {
         console.log(err)
-        setPosts('no record found')
 
       })
 
   }
+
+
   const indexOfLastPost = currentPage * postsPerPage
   const indexOfFirstPost = indexOfLastPost - postsPerPage
   const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost)
@@ -51,94 +49,37 @@ function App() {
 
   const goBack = () => {
     setShowSearch(true);
-    setShowTable(false);
-    setSearch('')
+    setSearch('') 
     setPosts([])
     setCurrentPage(1)
-    setAvatarAsc(false)
-    setLoginAsc(true)
-    setTypeAsc(false)
     setPostsPerPage(5)
   }
 
-  const avatarsort = () => {
-    const asort = lodash.orderBy(posts, ['avatar_url'], ['asc', 'desc'])
-    setPosts(asort)
-    setAvatarAsc(true)
-    setLoginAsc(false)
-    setTypeAsc(false)
-  }
 
-  const loginsort = () => {
-    const lsort = lodash.orderBy(posts, ['login'], ['asc', 'desc'])
-    setPosts(lsort)
-    setAvatarAsc(false)
-    setLoginAsc(true)
-    setTypeAsc(false)
-  }
-
-  const typesort = () => {
-    const tsort = lodash.orderBy(posts, ['type'], ['asc', 'desc'])
-    setPosts(tsort)
-    setAvatarAsc(false)
-    setLoginAsc(false)
-    setTypeAsc(true)
-  }
-  const avatarSortD = () => {
-    const asortD = lodash.orderBy(posts, ['avatar_url'], ['asc', 'desc']).reverse()
-    setPosts(asortD)
-    setAvatarAsc(false)
-    setLoginAsc(false)
-    setTypeAsc(false)
-  }
-  const loginSortD = () => {
-    const lsortD = lodash.orderBy(posts, ['login'], ['asc', 'desc']).reverse()
-    setPosts(lsortD)
-    setAvatarAsc(false)
-    setLoginAsc(false)
-    setTypeAsc(false)
-  }
-  const typeSortD = () => {
-    const tsortD = lodash.orderBy(posts, ['type'], ['asc', 'desc']).reverse()
-    setPosts(tsortD)
-    setAvatarAsc(false)
-    setLoginAsc(false)
-    setTypeAsc(false)
-  }
   return (
     <div >
+      <h1 className='text-center assign'>React JS Assignment</h1>
       <Container>
-        <h1 className='text-center assign'>React JS Assignment</h1>
         {showSearch ? <SearchBar
           handleSearch={handleSearch}
           setSearch={setSearch}
           search={search}
-        /> : <div></div>}
+          loading={loading}
+        /> : <div>
+          <MainTable
+            posts={currentPosts}
+            postsPerPage={postsPerPage}
+            totalPosts={posts.length}
+            setPostsPerPage={setPostsPerPage}
+            paginate={paginate}
+            goBack={goBack}
+            setPosts={setPosts}
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+          />
+          <PaginationPart posts={posts} postsPerPage={postsPerPage} paginate={paginate} currentPage={currentPage} setCurrentPage={setCurrentPage} /></div>}
 
-        {showTable ? <MainTable
-          posts={currentPosts}
-          postsPerPage={postsPerPage}
-          totalPosts={posts.length}
-          setPostsPerPage={setPostsPerPage}
-          paginate={paginate}
-          goBack={goBack}
-          avatarsort={avatarsort}
-          loginsort={loginsort}
-          typesort={typesort}
-          loginAsc={loginAsc}
-          typeAsc={typeAsc}
-          avatarAsc={avatarAsc}
-          typeSortD={typeSortD}
-          loginSortD={loginSortD}
-          avatarSortD={avatarSortD}
-          PageNumberLimit={PageNumberLimit}
-          maxpageNumberLimit={maxpageNumberLimit}
-          minpageNumberLimit={minpageNumberLimit}
-          setPageNumberLimit={setPageNumberLimit}
-          setMaxPageNumberLimit={setMaxPageNumberLimit}
-          setMinPageNumberLimit={setMinPageNumberLimit}
-          currentPage={currentPage}
-          setCurrentPage={setCurrentPage} /> : <div></div>}
+
       </Container>
     </div>
   );
